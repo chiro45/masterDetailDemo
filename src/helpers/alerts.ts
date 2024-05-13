@@ -20,3 +20,10 @@ export const handleError = (title: string) => {
     text: `${title}`,
   });
 };
+export const handleSuccess = (title: string) => {
+  Swal.fire({
+    title: "Perfecto",
+    text: title,
+    icon: "success",
+  });
+};

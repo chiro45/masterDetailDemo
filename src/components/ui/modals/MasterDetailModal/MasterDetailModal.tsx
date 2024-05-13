@@ -19,6 +19,7 @@ import { ProductoManufacturadoService } from "../../../../services/ProductoManuf
 import { removeElementActive } from "../../../../redux/slices/TablaReducer";
 import { InsumoServices } from "../../../../services/InsumosServices";
 import { IProductoManufacturado } from "../../../../types/IProductoManufacturado";
+import { handleSuccess } from "../../../../helpers/alerts";
 
 const API_URL = import.meta.env.VITE_API_URL;
 //valores iniciales del modal
@@ -181,6 +182,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
       const parseNewId = { ...itemValue, id: `${amountItems + 1}` };
       await productoManufacturadoService.post(parseNewId);
     }
+    handleSuccess("Elemento guardado correctamente");
     handleClose();
     resetValues();
     getData(); //trae nuevamente los elementos
@@ -422,7 +424,6 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
                   <TableIngredients
                     dataIngredients={itemValue.ingredientes}
                     handleDeleteItem={deleteIngredient}
-                   
                   />
                 </div>
               )}
