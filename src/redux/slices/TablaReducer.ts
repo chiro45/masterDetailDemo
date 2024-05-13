@@ -1,11 +1,11 @@
 // Importaciones necesarias
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IarticuloManufacturado } from "../../types/articuloManufacturado";
+import { IProductoManufacturado } from "../../types/IProductoManufacturado";
 
 // Definimos la interfaz para el estado inicial del slice
 interface IInitialState {
-  dataTable: IarticuloManufacturado[]; // Datos de la tabla
-  elementActive: null | IarticuloManufacturado; // Elemento activo seleccionado
+  dataTable: IProductoManufacturado[]; // Datos de la tabla
+  elementActive: null | IProductoManufacturado; // Elemento activo seleccionado
 }
 
 // Estado inicial del slice
@@ -16,7 +16,7 @@ const initialState: IInitialState = {
 
 // Interfaz para la acción del payload personalizado
 interface PayloadSetElement {
-  element: IarticuloManufacturado; // Elemento de tipo IPersona
+  element: IProductoManufacturado; // Elemento de tipo IPersona
 }
 
 // Creamos un slice con Redux Toolkit para manejar la tabla
@@ -25,7 +25,7 @@ const TablaReducer = createSlice({
   initialState, // Estado inicial del slice
   reducers: {
     // Reducer para establecer los datos de la tabla
-    setDataTable(state, action: PayloadAction<IarticuloManufacturado[]>) {
+    setDataTable(state, action: PayloadAction<IProductoManufacturado[]>) {
       state.dataTable = action.payload; // Actualizamos los datos de la tabla con los datos proporcionados
     },
     // Reducer para establecer el elemento activo

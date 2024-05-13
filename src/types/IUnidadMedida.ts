@@ -1,5 +1,5 @@
 export interface IUnidadaMedida {
-  id: number;
+  id: string;
   denominacion: string;
   abreviatura: string;
 }

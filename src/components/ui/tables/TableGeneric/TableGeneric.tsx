@@ -7,9 +7,9 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { useEffect, useState } from "react";
-import { ButtonsTable } from "../ButtonsTable/ButtonsTable";
-import { useAppSelector } from "../../../hooks/redux";
-import { IarticuloManufacturado } from "../../../types/articuloManufacturado";
+import { ButtonsTable } from "../../buttons/ButtonsTable/ButtonsTable";
+import { useAppSelector } from "../../../../hooks/redux";
+import { IProductoManufacturado } from "../../../../types/IProductoManufacturado";
 
 // Definimos la interfaz para cada columna de la tabla
 interface ITableColumn<T> {
@@ -22,7 +22,7 @@ export interface ITableProps<T> {
   columns: ITableColumn<T>[]; // Definición de las columnas de la tabla
   handleDelete: (id: number) => void; // Función para manejar la eliminación de un elemento
   setOpenModal: (state: boolean) => void;
-  handleCancelOrRegister: (id: number, data: IarticuloManufacturado) => void;
+  handleCancelOrRegister: (id: number, data: IProductoManufacturado) => void;
 }
 
 export const TableGeneric = <T extends { id: any }>({

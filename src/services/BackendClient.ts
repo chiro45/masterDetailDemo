@@ -11,7 +11,7 @@ export abstract class BackendClient<T> extends AbstractBackendClient<T> {
     return data as T[];
   }
 
-  async getById(id: number): Promise<T | null> {
+  async getById(id: number | string): Promise<T | null> {
     const response = await fetch(`${this.baseUrl}/${id}`);
     if (!response.ok) {
       return null;
@@ -32,7 +32,7 @@ export abstract class BackendClient<T> extends AbstractBackendClient<T> {
     return newData as T;
   }
 
-  async put(id: number, data: T): Promise<T> {
+  async put(id: number | string, data: T): Promise<T> {
     const response = await fetch(`${this.baseUrl}/${id}`, {
       method: "PUT",
       headers: {
@@ -45,7 +45,7 @@ export abstract class BackendClient<T> extends AbstractBackendClient<T> {
   }
 
   // Método para eliminar un elemento por su ID
-  async delete(id: number): Promise<void> {
+  async delete(id: number | string): Promise<void> {
     const response = await fetch(`${this.baseUrl}/${id}`, {
       method: "DELETE",
     });

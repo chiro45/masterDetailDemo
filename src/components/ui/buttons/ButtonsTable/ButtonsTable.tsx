@@ -1,16 +1,14 @@
 import { Button } from "@mui/material";
-import { useAppDispatch } from "../../../hooks/redux";
-import {
-  setElementActive,
-} from "../../../redux/slices/TablaReducer";
-import { IarticuloManufacturado } from "../../../types/articuloManufacturado";
+import { useAppDispatch } from "../../../../hooks/redux";
+import { setElementActive } from "../../../../redux/slices/TablaReducer";
+import { IProductoManufacturado } from "../../../../types/IProductoManufacturado";
 
 // Interfaz para los props del componente
 interface IButtonsTable {
-  el: IarticuloManufacturado; // Elemento de tipo IPersona
+  el: IProductoManufacturado; // Elemento de tipo IPersona
   handleDelete: (id: number) => void; // Función para manejar la eliminación de un elemento
   setOpenModal: (state: boolean) => void; // Función para manejar la eliminación de un elemento
-  handleCancelOrRegister: (id: number, el: IarticuloManufacturado) => void;
+  handleCancelOrRegister: (id: number, el: IProductoManufacturado) => void;
 }
 
 export const ButtonsTable = ({
@@ -36,7 +34,6 @@ export const ButtonsTable = ({
 
   const handleChangeRegisterOrCancelItem = () => {
     handleCancelOrRegister(el.id, { ...el, alta: !el.alta });
-  
   };
 
   return (

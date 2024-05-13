@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { MasterDetailModal } from "../ui/modals/MasterDetailModal/MasterDetailModal";
 import { NavBar } from "../ui/NavBar/NavBar";
-import { TableGeneric } from "../ui/TableGeneric/TableGeneric";
-import { IarticuloManufacturado } from "../../types/articuloManufacturado";
+import { TableGeneric } from "../ui/tables/TableGeneric/TableGeneric";
+import { IProductoManufacturado } from "../../types/IProductoManufacturado";
 import { ProductoManufacturadoService } from "../../services/ProductoManufacturadoService";
 import { useAppDispatch } from "../../hooks/redux";
 import {
@@ -19,7 +19,7 @@ const ColumnsProductosManufacturados = [
   {
     label: "Categoria",
     key: "categoria",
-    render: (element: IarticuloManufacturado) => element.categoria.denominacion,
+    render: (element: IProductoManufacturado) => element.categoria.denominacion,
   },
   {
     label: "Tiempo de cocina",
@@ -28,7 +28,7 @@ const ColumnsProductosManufacturados = [
   {
     label: "Alta/baja",
     key: "alta",
-    render: (element: IarticuloManufacturado) => (element.alta ? "Si" : "No"),
+    render: (element: IProductoManufacturado) => (element.alta ? "Si" : "No"),
   },
   {
     label: "precio",
@@ -80,9 +80,12 @@ export const MasterDetail = () => {
     dispatch(removeElementActive());
     getDataTable();
   };
-  
+
   //funcion para dar de baja o alta un elemento
-  const handleCancelOrRegister = async (id: number, data: any) => {
+  const handleCancelOrRegister = async (
+    id: number,
+    data: IProductoManufacturado
+  ) => {
     await productoManufacturadoService.put(id, data);
     dispatch(removeElementActive());
     getDataTable();
@@ -120,7 +123,7 @@ export const MasterDetail = () => {
 
       {!loading ? (
         // Mostrar la tabla de personas una vez que los datos se han cargado
-        <TableGeneric<IarticuloManufacturado>
+        <TableGeneric<IProductoManufacturado>
           handleDelete={handleDelete}
           columns={ColumnsProductosManufacturados}
           setOpenModal={setOpenModal}

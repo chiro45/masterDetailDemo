@@ -10,23 +10,23 @@ import {
 } from "@mui/material";
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import styles from "./MasterDetailModal.module.css";
-import { TableIngredients } from "../../TableIngredients/TableIngredients";
+import { TableIngredients } from "../../tables/TableIngredients/TableIngredients";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/redux";
-import { Iarticulo } from "../../../../types/articulo";
-import { categorias } from "../../../../types/categorias";
+import { IInsumo } from "../../../../types/IInsumo";
+import { categorias } from "../../../../types/Icategorias";
 import { CategoriaComidaService } from "../../../../services/CategoriaComidaService";
 import { ProductoManufacturadoService } from "../../../../services/ProductoManufacturadoService";
 import { removeElementActive } from "../../../../redux/slices/TablaReducer";
 import { InsumoServices } from "../../../../services/InsumosServices";
-import { IarticuloManufacturado } from "../../../../types/articuloManufacturado";
+import { IProductoManufacturado } from "../../../../types/IProductoManufacturado";
 
 const API_URL = import.meta.env.VITE_API_URL;
 //valores iniciales del modal
-const initialValues: IarticuloManufacturado = {
-  id: 0,
+const initialValues: IProductoManufacturado = {
+  id: "0",
   alta: true,
   categoria: {
-    id: 0,
+    id: "0",
     denominacion: "Seleccione una categoria",
     categorias_hijas: null,
   },
@@ -101,7 +101,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
     const filter = categoriaComidas.find(
       (el) => el.denominacion === denominacion
     ) || {
-      id: 0,
+      id: "0",
       denominacion: "Seleccione una categoria",
       categorias_hijas: null,
     };
@@ -129,7 +129,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
   };
 
   //estado que almacena ingredientes segun la categoria activa
-  const [insumosByCategorie, setInsumosByCategorie] = useState<Iarticulo[]>([]);
+  const [insumosByCategorie, setInsumosByCategorie] = useState<IInsumo[]>([]);
 
   //realizamos el cambio del ingrediente actual
   const handleChangeInsumosValues = (e: SelectChangeEvent) => {
@@ -156,7 +156,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
       ingredientes: [...itemValue.ingredientes, parse],
     });
     resetValueInsumos();
-    setInsumosByCategorie([])
+    setInsumosByCategorie([]);
   };
 
   //eliminamos un ingrediente
@@ -170,13 +170,16 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
   };
 
   //========LOGICA DEL MODAL==================
-
+  const amountItems = useAppSelector(
+    (state) => state.tablaReducer.dataTable.length
+  );
   //si se confirma edita o agrega un nuevo elemento
   const handleConfirmModal = async () => {
     if (data) {
       await productoManufacturadoService.put(data.id, itemValue);
     } else {
-      await productoManufacturadoService.post(itemValue);
+      const parseNewId = { ...itemValue, id: `${amountItems + 1}` };
+      await productoManufacturadoService.post(parseNewId);
     }
     handleClose();
     resetValues();
@@ -253,7 +256,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
         <div className={styles.modalContainer}>
           <div className={styles.modalContainerContent}>
             <div style={{ textAlign: "center" }}>
-              <h2>Crear un articulo</h2>
+              <h1>Crear un articulo</h1>
             </div>
 
             <div className={styles.productContainer}>
@@ -323,7 +326,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
             </div>
             <div>
               <div style={{ textAlign: "center" }}>
-                <h2>Ingresa la receta</h2>
+                <h1>Ingresa la receta</h1>
               </div>
               <div
                 style={{
@@ -346,7 +349,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
                 />
               </div>
               <div style={{ textAlign: "center" }}>
-                <h2>Ingredientes</h2>
+                <h1>Ingredientes</h1>
               </div>
               <div
                 style={{

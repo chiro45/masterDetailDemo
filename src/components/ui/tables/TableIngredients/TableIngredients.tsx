@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Iarticulo } from "../../../types/articulo";
+import { IInsumo } from "../../../../types/IInsumo";
 
 const columns = [
   {
@@ -17,17 +17,17 @@ const columns = [
   {
     label: "Ingrediente",
     key: "ingrediente",
-    render: (element: Iarticulo) => element.denominacion,
+    render: (element: IInsumo) => element.denominacion,
   },
   {
     label: "Unidad de medida",
     key: "unidadMedida",
-    render: (element: Iarticulo) => element.unidadMedida.denominacion,
+    render: (element: IInsumo) => element.unidadMedida.denominacion,
   },
   {
     label: "Cantidad",
     key: "cantidad",
-    render: (element: Iarticulo) =>
+    render: (element: IInsumo) =>
       `${element.cantidad} ${element.unidadMedida.abreviatura}`,
   },
   {
@@ -37,7 +37,7 @@ const columns = [
 ];
 export interface ITableIngredients {
   handleDeleteItem: (indice: number) => void;
-  dataIngredients: any[];
+  dataIngredients: IInsumo[];
 }
 
 export const TableIngredients = ({
