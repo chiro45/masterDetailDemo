@@ -165,6 +165,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
   };
 
   //========LOGICA DEL MODAL==================
+  //TODO: NO HACER
   const amountItems = useAppSelector(
     (state) => state.tablaReducer.dataTable.length
   );
