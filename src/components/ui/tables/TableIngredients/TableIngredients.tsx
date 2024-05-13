@@ -59,7 +59,7 @@ export const TableIngredients = ({
     handleConfirm("Seguro quieres eliminar el ingrediente", handleDelete);
   };
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: "40vh" }}>
+    <TableContainer component={Paper} sx={{ maxHeight: "25vh" }}>
       <Table sx={{ minWidth: 650 }} stickyHeader aria-label="simple table">
         <TableHead>
           <TableRow>

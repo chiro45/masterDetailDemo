@@ -85,13 +85,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
     });
   };
 
-  //maneja el check de alta y baja del articulo manufacturado
-  const handleCancelOrRegister = () => {
-    setItemValue({
-      ...itemValue,
-      alta: !itemValue.alta,
-    });
-  };
+  
 
   //traemos categorias del apartado comida
   const [categoriaComidas, setcategoriaComidas] = useState<categorias[]>([]);
@@ -317,12 +311,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
                   rows={4}
                 />
 
-                <FormControlLabel
-                  name="alta"
-                  onChange={handleCancelOrRegister}
-                  control={<Checkbox checked={itemValue.alta} />}
-                  label="Alta de producto"
-                />
+                
               </div>
             </div>
             <div>
