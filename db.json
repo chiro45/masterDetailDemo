@@ -215,12 +215,17 @@
   "producto_manufacturado": [
     {
       "id": "1",
-      "descripción": "La Pizza Hawaiana es una deliciosa combinación de sabores dulces y salados que te transportará a una isla tropical en cada bocado. Con una base de masa de pizza perfectamente horneada, se cubre con salsa de tomate, generosas porciones de mozzarella derretida, jugosas rodajas de piña fresca y trozos de jamón ahumado.",
-      "alta": false,
-      "receta": "Extender la masa de pizza, agregar salsa de tomate, mozzarella, piña y jamón. Hornear hasta que esté dorada.",
-      "tiempoEstimadoMinutos": 30,
-      "precioVenta": 10.99,
+      "categoria": {
+        "id": 1,
+        "denominacion": "Pizzas",
+        "categorias_hijas": null
+      },
       "denominacion": "Pizza Hawaiana",
+      "alta": true,
+      "precioVenta": 10.99,
+      "tiempoEstimadoMinutos": 30,
+      "descripción": "La Pizza Hawaiana es una deliciosa combinación de sabores dulces y salados que te transportará a una isla tropical en cada bocado. Con una base de masa de pizza perfectamente horneada, se cubre con salsa de tomate, generosas porciones de mozzarella derretida, jugosas rodajas de piña fresca y trozos de jamón ahumado.",
+      "receta": "Extender la masa de pizza, agregar salsa de tomate, mozzarella, piña y jamón. Hornear hasta que esté dorada.",
       "ingredientes": [
         {
           "id": 1,
@@ -296,13 +301,7 @@
           },
           "cantidad": 5
         }
-      ],
-      "categoria": {
-        "id": 1,
-        "denominacion": "Pizzas",
-        "categorias_hijas": null
-      }
+      ]
     }
-    
   ]
 }

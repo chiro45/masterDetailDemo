@@ -40,7 +40,7 @@ const initialValues: IProductoManufacturado = {
 const initialIngredients = {
   categoriaInsumo: "Categoria",
   ingrediente: {
-    id: "1",
+    id: "0",
     denominacion: "Ingrediente",
     unidadMedida: {
       id: 1,
@@ -96,16 +96,16 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
   const [categoriaComidas, setcategoriaComidas] = useState<categorias[]>([]);
 
   //realizamos el cambio de categoria en articuloManufacturado TODO: REVISAR Otra alternativa a mui
-  const handleChangeCategorieArticuloManufacturado = (e: SelectChangeEvent) => {
+  const handleChangeCategorieArticuloManufacturado = async (
+    e: SelectChangeEvent
+  ) => {
     const denominacion = e.target.value;
-    const filter = categoriaComidas.find(
-      (el) => el.denominacion === denominacion
-    ) || {
-      id: "0",
-      denominacion: "Seleccione una categoria",
-      categorias_hijas: null,
-    };
-    setItemValue({ ...itemValue, categoria: filter });
+    const res = await categoriaComidaService
+      .getById(denominacion)
+      .then((data) => data);
+    if (res) {
+      setItemValue({ ...itemValue, categoria: res });
+    }
   };
 
   //============INGREDIENTES DEL ARTICULO MANUFACTURADO
@@ -119,7 +119,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
 
   //seleccionamos una categoria del apartado insumos y se setean todos los ingredientes que vayan con ella
   const handleChangeinsumosCategories = async (e: SelectChangeEvent) => {
-    const insumos = await InsumosServices.getAll().then((data) => data);
+    const insumos = await insumosServices.getAll().then((data) => data);
     const denominacion = e.target.value;
     setvaluesInsumo({ ...initialIngredients, categoriaInsumo: denominacion });
     const result = insumos.filter(
@@ -132,10 +132,10 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
   const [insumosByCategorie, setInsumosByCategorie] = useState<IInsumo[]>([]);
 
   //realizamos el cambio del ingrediente actual
-  const handleChangeInsumosValues = (e: SelectChangeEvent) => {
+  const handleChangeInsumosValues = async (e: SelectChangeEvent) => {
     const { value } = e.target;
-    const result = insumosByCategorie.find((el) => el.denominacion === value);
-    setvaluesInsumo({ ...valueInsumos, ingrediente: result });
+    const res = await insumosServices.getById(value).then((data) => data);
+    if (res) setvaluesInsumo({ ...valueInsumos, ingrediente: res });
   };
 
   //realizamos el cambio de la cantidad del ingrediente
@@ -175,7 +175,6 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
   );
   //si se confirma edita o agrega un nuevo elemento
   const handleConfirmModal = async () => {
-    
     if (data) {
       await productoManufacturadoService.put(data.id, itemValue);
     } else {
@@ -207,7 +206,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
     `${API_URL}/producto_manufacturado`
   );
 
-  const InsumosServices = new InsumoServices(`${API_URL}/insumos`);
+  const insumosServices = new InsumoServices(`${API_URL}/insumos`);
 
   //funciones para traer los elementos
   const getCategoriasInsumos = async () => {
@@ -381,32 +380,26 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
                   variant="filled"
                   label="Ingrediente"
                   name="Ingrediente"
-                  value={valueInsumos.ingrediente.denominacion}
+                  value={valueInsumos.ingrediente.id}
                   onChange={handleChangeInsumosValues}
                 >
-                  <MenuItem selected value={"Ingrediente"}>
+                  <MenuItem selected value={"0"}>
                     Ingrediente
                   </MenuItem>
-                  {insumosByCategorie.map((el, index) => (
-                    <MenuItem key={index} value={el.denominacion}>
+                  {insumosByCategorie.map((el) => (
+                    <MenuItem key={el.id} value={el.id}>
                       {el.denominacion}
                     </MenuItem>
                   ))}
                 </Select>
                 {valueInsumos.ingrediente.denominacion !== "Ingrediente" && (
-                  <Select
-                    variant="filled"
-                    label="Ingrediente"
-                    disabled
+                  <TextField
+                    type="text"
+                    label={valueInsumos.ingrediente.unidadMedida.denominacion}
                     value={valueInsumos.ingrediente.unidadMedida.abreviatura}
-                  >
-                    <MenuItem
-                      selected
-                      value={valueInsumos.ingrediente.unidadMedida.abreviatura}
-                    >
-                      {valueInsumos.ingrediente.unidadMedida.abreviatura}
-                    </MenuItem>
-                  </Select>
+                    variant="filled"
+                    disabled
+                  />
                 )}
                 <TextField
                   type="number"
@@ -429,6 +422,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
                   <TableIngredients
                     dataIngredients={itemValue.ingredientes}
                     handleDeleteItem={deleteIngredient}
+                   
                   />
                 </div>
               )}
