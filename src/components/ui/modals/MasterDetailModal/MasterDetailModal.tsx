@@ -175,6 +175,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
   );
   //si se confirma edita o agrega un nuevo elemento
   const handleConfirmModal = async () => {
+    
     if (data) {
       await productoManufacturadoService.put(data.id, itemValue);
     } else {
@@ -249,6 +250,7 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
     <div>
       <Modal
         open={open}
+        style={{ zIndex: 200 }}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

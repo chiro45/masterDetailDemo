@@ -2,13 +2,17 @@ import { Button } from "@mui/material";
 import { useAppDispatch } from "../../../../hooks/redux";
 import { setElementActive } from "../../../../redux/slices/TablaReducer";
 import { IProductoManufacturado } from "../../../../types/IProductoManufacturado";
+import { handleConfirm } from "../../../../helpers/alerts";
 
 // Interfaz para los props del componente
 interface IButtonsTable {
   el: IProductoManufacturado; // Elemento de tipo IPersona
-  handleDelete: (id: number) => void; // Función para manejar la eliminación de un elemento
+  handleDelete: (id: number | string) => void; // Función para manejar la eliminación de un elemento
   setOpenModal: (state: boolean) => void; // Función para manejar la eliminación de un elemento
-  handleCancelOrRegister: (id: number, el: IProductoManufacturado) => void;
+  handleCancelOrRegister: (
+    id: number | string,
+    el: IProductoManufacturado
+  ) => void;
 }
 
 export const ButtonsTable = ({
@@ -29,7 +33,13 @@ export const ButtonsTable = ({
 
   // Función para manejar la eliminación de un elemento
   const handleDeleteItem = () => {
-    handleDelete(el.id); // Llamar a la función handleDelete con el ID del elemento
+    const handleDeleteElement = () => {
+      handleDelete(el.id); // Llamar a la función handleDelete con el ID del elemento
+    };
+    handleConfirm(
+      "Seguro quieres eliminar el articulo manufacturado",
+      handleDeleteElement
+    );
   };
 
   const handleChangeRegisterOrCancelItem = () => {

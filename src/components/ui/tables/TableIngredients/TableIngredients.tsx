@@ -8,6 +8,7 @@ import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { IInsumo } from "../../../../types/IInsumo";
+import { handleConfirm } from "../../../../helpers/alerts";
 
 const columns = [
   {
@@ -51,6 +52,12 @@ export const TableIngredients = ({
     setRows(dataIngredients);
   }, [dataIngredients]);
 
+  const handleDelete = (index: number) => {
+    const handleDelete = () => {
+      handleDeleteItem(index);
+    };
+    handleConfirm("Seguro quieres eliminar el ingrediente", handleDelete);
+  };
   return (
     <TableContainer component={Paper} sx={{ maxHeight: "40vh" }}>
       <Table sx={{ minWidth: 650 }} stickyHeader aria-label="simple table">
@@ -76,9 +83,7 @@ export const TableIngredients = ({
                       ) : column.key === "actions" ? ( // Si el label de la columna es "Acciones" se renderizan los botones de acción
                         <Button
                           variant="text"
-                          onClick={() => {
-                            handleDeleteItem(index);
-                          }}
+                          onClick={() => handleDelete(index)}
                         >
                           Eliminar
                         </Button>

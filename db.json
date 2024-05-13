@@ -103,6 +103,11 @@
       "id": "8",
       "abreviatura": "cucharada",
       "denominacion": "cucharada"
+    },
+    {
+      "id": "9",
+      "abreviatura": "rd",
+      "denominacion": "rodaja"
     }
   ],
   "insumos": [
@@ -118,7 +123,7 @@
         "id": 1,
         "denominacion": "Quesos"
       },
-      "cantidad": 200
+      "cantidad": 1000
     },
     {
       "id": "2",
@@ -132,7 +137,7 @@
         "id": 3,
         "denominacion": "Vegetales"
       },
-      "cantidad": 3
+      "cantidad": 1000
     },
     {
       "id": "3",
@@ -146,7 +151,7 @@
         "id": 2,
         "denominacion": "Salsas"
       },
-      "cantidad": 2
+      "cantidad": 1000
     },
     {
       "id": "4",
@@ -160,7 +165,7 @@
         "id": 4,
         "denominacion": "Carnes"
       },
-      "cantidad": 300
+      "cantidad": 1000
     },
     {
       "id": "5",
@@ -173,7 +178,8 @@
       "categoria": {
         "id": 5,
         "denominacion": "Especias"
-      }
+      },
+      "cantidad": 1000
     },
     {
       "id": "6",
@@ -187,21 +193,23 @@
         "id": 6,
         "denominacion": "Masas",
         "categorias_hijas": null
-      }
+      },
+      "cantidad": 1000
     },
     {
       "id": "7",
       "denominacion": "Piña",
       "unidadMedida": {
-        "id": 7,
-        "abreviatura": "unidad",
-        "denominacion": "ud"
+        "id": "9",
+        "abreviatura": "rd",
+        "denominacion": "rodajas"
       },
       "categoria": {
         "id": 7,
         "denominacion": "Frutas",
         "categorias_hijas": null
-      }
+      },
+      "cantidad": 1000
     }
   ],
   "producto_manufacturado": [
@@ -295,5 +303,6 @@
         "categorias_hijas": null
       }
     }
+    
   ]
 }
