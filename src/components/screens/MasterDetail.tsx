@@ -9,7 +9,7 @@ import {
   removeElementActive,
   setDataTable,
 } from "../../redux/slices/TablaReducer";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 // Definición de la URL base de la API
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -31,7 +31,7 @@ const ColumnsProductosManufacturados = [
     render: (element: IProductoManufacturado) => (element.alta ? "Si" : "No"),
   },
   {
-    label: "precio",
+    label: "Precio",
     key: "precioVenta",
   },
   {
@@ -130,7 +130,16 @@ export const MasterDetail = () => {
           handleCancelOrRegister={handleCancelOrRegister}
         />
       ) : (
-        <h2>Cargando</h2>
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress />
+        </div>
       )}
       <MasterDetailModal
         getData={getDataTable}
