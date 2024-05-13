@@ -26,7 +26,7 @@ const ColumnsProductosManufacturados = [
     key: "tiempoEstimadoMinutos",
   },
   {
-    label: "Alta/baja",
+    label: "Habilitado",
     key: "alta",
     render: (element: IProductoManufacturado) => (element.alta ? "Si" : "No"),
   },
@@ -116,7 +116,7 @@ export const MasterDetail = () => {
               setOpenModal(true);
             }}
           >
-            Agregar Articulo manufacturado
+            Agregar un producto manufacturado
           </Button>
         </div>
       </div>

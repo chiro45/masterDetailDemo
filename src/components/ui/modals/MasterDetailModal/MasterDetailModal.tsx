@@ -259,25 +259,23 @@ export const MasterDetailModal: FC<IMasterDetailModal> = ({
         <div className={styles.modalContainer}>
           <div className={styles.modalContainerContent}>
             <div style={{ textAlign: "center" }}>
-              <h1>Crear un articulo</h1>
+              <h1>{`${
+                data ? "Editar" : "Crear"
+              } un producto manufacturado`}</h1>
             </div>
 
             <div className={styles.productContainer}>
               <div className={styles.productContainerInputs}>
                 <Select
                   variant="filled"
-                  value={itemValue.categoria.denominacion}
+                  value={itemValue.categoria.id}
                   onChange={handleChangeCategorieArticuloManufacturado}
                 >
-                  <MenuItem selected value={"Seleccione una categoria"}>
+                  <MenuItem selected value={"0"}>
                     Seleccione una categoria
                   </MenuItem>
                   {categoriaComidas.map((el, index) => (
-                    <MenuItem
-                      key={index}
-                      id={`${el.id}`}
-                      value={el.denominacion}
-                    >
+                    <MenuItem key={index} id={`${el.id}`} value={`${el.id}`}>
                       {el.denominacion}
                     </MenuItem>
                   ))}

@@ -216,7 +216,7 @@
     {
       "id": "1",
       "categoria": {
-        "id": 1,
+        "id": "1",
         "denominacion": "Pizzas",
         "categorias_hijas": null
       },

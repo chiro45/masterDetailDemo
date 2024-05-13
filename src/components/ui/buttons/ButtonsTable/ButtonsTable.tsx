@@ -61,7 +61,7 @@ export const ButtonsTable = ({
           variant="contained"
           color="error"
         >
-          Dar de baja
+          Deshabilitar
           <span className="material-symbols-outlined">block</span>
         </Button>
       ) : (
@@ -70,18 +70,16 @@ export const ButtonsTable = ({
           variant="contained"
           color="success"
         >
-          Dar de alta
+          Habilitar
           <span className="material-symbols-outlined">check</span>
         </Button>
       )}
       {/* Botón para editar el elemento */}
       <Button variant="contained" onClick={handleModalSelected}>
-        Editar
         <span className="material-symbols-outlined">edit</span>
       </Button>
       {/* Botón para eliminar el elemento */}
       <Button variant="contained" color="error" onClick={handleDeleteItem}>
-        Eliminar
         <span className="material-symbols-outlined">delete_forever</span>
       </Button>
     </div>
