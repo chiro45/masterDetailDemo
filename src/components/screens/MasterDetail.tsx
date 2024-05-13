@@ -75,7 +75,7 @@ export const MasterDetail = () => {
   }, []);
 
   //funcion para eleminar un elemento
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: number | string) => {
     await productoManufacturadoService.delete(id);
     dispatch(removeElementActive());
     getDataTable();
@@ -83,7 +83,7 @@ export const MasterDetail = () => {
 
   //funcion para dar de baja o alta un elemento
   const handleCancelOrRegister = async (
-    id: number,
+    id: number | string,
     data: IProductoManufacturado
   ) => {
     await productoManufacturadoService.put(id, data);

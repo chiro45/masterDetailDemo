@@ -20,9 +20,12 @@ interface ITableColumn<T> {
 
 export interface ITableProps<T> {
   columns: ITableColumn<T>[]; // Definición de las columnas de la tabla
-  handleDelete: (id: number) => void; // Función para manejar la eliminación de un elemento
+  handleDelete: (id: number | string) => void; // Función para manejar la eliminación de un elemento
   setOpenModal: (state: boolean) => void;
-  handleCancelOrRegister: (id: number, data: IProductoManufacturado) => void;
+  handleCancelOrRegister: (
+    id: number | string,
+    data: IProductoManufacturado
+  ) => void;
 }
 
 export const TableGeneric = <T extends { id: any }>({
